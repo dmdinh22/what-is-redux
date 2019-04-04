@@ -37,6 +37,11 @@ function createStore(initialReducer, initialState = {}) {
                     subscriber => subscriber !== listener
                 );
             };
+        },
+        // to update reducer fn if app needs dynamic loading
+        replaceReducer(newReducer) {
+            reducer = newReducer;
+            this.dispatch({ type: 'REPLACE' });
         }
     };
 }
