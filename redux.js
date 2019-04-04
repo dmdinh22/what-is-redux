@@ -21,6 +21,11 @@ function createStore(initialReducer, initialState = {}) {
     return {
         getState() {
             return state;
+        },
+        // let user notify that something happened
+        // dispatching the action -> calling reducer with current state and action we passed
+        dispatch(action) {
+            state = reducer(state, action);
         }
     };
 }
