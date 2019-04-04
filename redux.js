@@ -9,9 +9,11 @@
 // Implementation
 
 // store - obj with methods on it
-function createStore() {
+//                                  pass initialState with default empty obj
+function createStore(initialReducer, initialState = {}) {
+    let reducer = initialReducer;
     // create empty state obj on instantiation
-    let state = {};
+    let state = reducer(initialState, { type: 'INIT' });
 
     // returning the store -> objg with getState func
     // - calling getState() grants access to state var
