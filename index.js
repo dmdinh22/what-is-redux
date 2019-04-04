@@ -1,9 +1,7 @@
 // Use redux store
 import { createStore } from './redux';
 
-const store = createStore();
 const state = store.getState();
-
 // Data flow of Redux
 /*
   1. User dispatches action
@@ -22,3 +20,6 @@ function countReducer(state = 0, action) {
     // if action passed doesn't match
     return state;
 }
+
+const store = createStore(countReducer);
+store.subscribe(() => console.log('The state changed!', store.getState()));

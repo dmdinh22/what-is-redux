@@ -12,6 +12,7 @@
 //                                  pass initialState with default empty obj
 function createStore(initialReducer, initialState = {}) {
     let reducer = initialReducer;
+    let subscribers = [];
     // create empty state obj on instantiation
     let state = reducer(initialState, { type: 'INIT' });
 
@@ -26,6 +27,10 @@ function createStore(initialReducer, initialState = {}) {
         // dispatching the action -> calling reducer with current state and action we passed
         dispatch(action) {
             state = reducer(state, action);
+            subscribers.forEach(subscriber => subscriber());
+        },
+        subscribe(listener) {
+            subscribers.push(listener);
         }
     };
 }
