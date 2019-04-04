@@ -31,6 +31,12 @@ function createStore(initialReducer, initialState = {}) {
         },
         subscribe(listener) {
             subscribers.push(listener);
+            // unsubscriber fn returned every time a subscribe is called to allow unsubscription
+            return () => {
+                subscribers = subscribers.filter(
+                    subscriber => subscriber !== listener
+                );
+            };
         }
     };
 }
