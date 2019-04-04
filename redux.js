@@ -11,6 +11,11 @@
 // store - obj with methods on it
 //                                  pass initialState with default empty obj
 function createStore(initialReducer, initialState = {}) {
+    // store enhancer - accepts createStore fn and returns augmented version
+    // Redux ships with one enhancer === applyMiddleware
+    if (enhancer) {
+        return enhancer(createStore)(initialReducer, initialState);
+    }
     let reducer = initialReducer;
     let subscribers = [];
     // create empty state obj on instantiation
